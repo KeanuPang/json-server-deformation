@@ -48,9 +48,12 @@ module.exports = (db, name, opts) => {
     next()
   }
 
-  const w = write(db)
-
-  router.route('/').get(show).post(create, w).put(update, w).patch(update, w)
+  if (opts._isReadOnly) {
+    router.route('/').get(show).post(show).put(show).patch(show)
+  } else {
+    const w = write(db)
+    router.route('/').get(show).post(create, w).put(update, w).patch(update, w)
+  }
 
   return router
 }
