@@ -13,7 +13,7 @@ const singular = require('./singular')
 const mixins = require('../mixins')
 
 module.exports = (db, opts) => {
-  opts = Object.assign({ foreignKeySuffix: 'Id', _isFake: false }, opts)
+  opts = Object.assign({ foreignKeySuffix: 'Id', _isFake: false, _isReadOnly: false }, opts)
 
   if (typeof db === 'string') {
     db = low(new FileSync(db))
